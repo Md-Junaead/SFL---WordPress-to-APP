@@ -1,0 +1,33 @@
+name: sfl
+description: "A Flutter WebView app for saverfavor.com"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  # Ensure you’re on Dart 3 (Flutter 3.x+)
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # In-app WebView
+  flutter_inappwebview: ^6.1.5
+
+  # MVVM state management
+  provider: ^6.1.4
+
+  # (Optional) check connectivity status
+  connectivity_plus: ^6.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Add your splash/logo asset
+  assets:
+    - assets/logo.png
