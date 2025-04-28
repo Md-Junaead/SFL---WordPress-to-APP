@@ -9,6 +9,8 @@ void main() {
   runApp(const MyApp());
 }
 
+// flutter build apk --build-name=1.0 --build-number=1
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
