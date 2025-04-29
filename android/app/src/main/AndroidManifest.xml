@@ -9,7 +9,7 @@
 
 
     <application
-        android:label="sfl"
+        android:label="SaverFavor"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
