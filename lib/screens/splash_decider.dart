@@ -65,7 +65,7 @@ import 'webview_screen.dart';
 import 'splash_screen.dart';
 
 class SplashDecider extends StatefulWidget {
-  const SplashDecider({Key? key}) : super(key: key);
+  const SplashDecider({super.key});
 
   @override
   State<SplashDecider> createState() => _SplashDeciderState();
@@ -103,7 +103,9 @@ class _SplashDeciderState extends State<SplashDecider> {
           child: InAppWebView(
             initialUrlRequest:
                 URLRequest(url: WebUri('https://saverfavor.com/')),
+            // ignore: deprecated_member_use
             initialOptions: InAppWebViewGroupOptions(
+              // ignore: deprecated_member_use
               crossPlatform: InAppWebViewOptions(
                 javaScriptEnabled: true,
                 cacheEnabled: true,
