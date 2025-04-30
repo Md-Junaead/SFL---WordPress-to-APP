@@ -1,5 +1,5 @@
-name: sfl
-description: "A Flutter WebView app for saverfavor.com"
+name: SaverFavor
+description: "SaverFavor WebView App"
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -22,6 +22,7 @@ dependencies:
   sqflite: ^2.4.2
   path: ^1.9.1
   path_provider: ^2.1.5
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +35,8 @@ flutter:
   # Add your splash/logo asset
   assets:
     - assets/logo.png
+
+# flutter_icons:
+#   android: true
+#   ios: true
+#   image_path: "assets/icon.png"  # Your icon file here
