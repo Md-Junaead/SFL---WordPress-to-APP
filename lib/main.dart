@@ -1,5 +1,3 @@
-// File: lib/main.dart
-
 import 'package:flutter/material.dart';
 import 'screens/splash_decider.dart';
 
@@ -12,7 +10,7 @@ void main() {
 // flutter build apk --build-name=1.0 --build-number=1
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
