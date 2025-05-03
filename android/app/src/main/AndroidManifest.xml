@@ -9,7 +9,7 @@
 
 
     <application
-        android:label="SaverFavor"
+        android:label="SaverFavor.com"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:hardwareAccelerated="true">

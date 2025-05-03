@@ -35,8 +35,10 @@ flutter:
   # Add your splash/logo asset
   assets:
     - assets/logo.png
+    - assets/splash/sfl_splash.gif
+    - assets/icon/sfl_apps_icon.png
 
-# flutter_icons:
-#   android: true
-#   ios: true
-#   image_path: "assets/icon.png"  # Your icon file here
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/sfl_apps_icon.png"
