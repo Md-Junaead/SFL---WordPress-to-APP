@@ -1,59 +1,60 @@
-// Top-level version constants (update these for each release)
-val VERSION_CODE = 1
-val VERSION_NAME = "1.0.0"
+// File: android/app/build.gradle.kts
+
+import java.util.Properties
+import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    // The Flutter plugin must be applied after Android and Kotlin plugins
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
-    namespace = "com.example.yourapp" // TODO: use your app’s actual application ID
-    compileSdk = 34  // Compile with Android 14 (API level 34) – highest available API
+    namespace = "com.example.sfl"            
+    compileSdk = 34                         // ✅ Update: target API 34 for Play Store compliance
 
     defaultConfig {
-        // Unique identifier for your app on Google Play
-        applicationId = "com.example.yourapp" // TODO: change to your application ID
-        
-        // Minimum Android version supported (Android 4.4, API 19)
-        minSdk = 19
-        
-        // Target the latest Android API (required: API 34 for new apps:contentReference[oaicite:0]{index=0})
-        targetSdk = 34
-        
-        // Versioning: use top-level constants for easy update per release
-        versionCode = VERSION_CODE
-        versionName = VERSION_NAME
-        
+        applicationId = "com.example.sfl"   // ✅ Update: your real app ID
+        minSdk = 19                         // ✅ Minimum SDK version (Android 4.4+)
+        targetSdk = 34                      // ✅ Update: target API 34 for new apps
+        versionCode = 1                     // ✅ Update per release
+        versionName = "2.0.2"               // ✅ Update per release
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // ─── Load keystore properties (NEW) ───
+    val keystorePropsFile = rootProject.file("key.properties")
+    val keystoreProps = Properties().apply {
+        if (keystorePropsFile.exists()) {
+            load(FileInputStream(keystorePropsFile))
+        }
     }
 
     signingConfigs {
         create("release") {
-            // TODO: Configure your release keystore here (via key.properties or directly)
-            // For now, this is a placeholder until you generate a real keystore.
+            // ✅ Update: use values from key.properties to sign release builds
+            keyAlias = keystoreProps["keyAlias"] as String
+            keyPassword = keystoreProps["keyPassword"] as String
+            storeFile = file(keystoreProps["storeFile"] as String)
+            storePassword = keystoreProps["storePassword"] as String
         }
     }
 
     buildTypes {
         getByName("debug") {
-            // Debug build: uses default debug keystore (no changes needed)
+            // No changes for debug build
         }
         create("release") {
-            // Release build: disable code shrinking/obfuscation (ProGuard/R8) for now
-            isMinifyEnabled = false
-            isShrinkResources = false
-            
-            // Use debug signing config temporarily so that flutter run --release works
-            signingConfig = signingConfigs.getByName("debug")
-            // TODO: Once a release keystore exists, switch to:
-            // signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false            // ✅ Keep code shrinking disabled
+            isShrinkResources = false          // ✅ Keep resource shrinking disabled
+
+            // ✅ Use the real release keystore instead of debug
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
-    // Java/Kotlin compatibility (optional, adjust if your project differs)
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -63,4 +64,4 @@ android {
     }
 }
 
-// Flutter Gradle plugin must remain last in the plugins block (preserves plugin order)
+// Flutter plugin must be applied last

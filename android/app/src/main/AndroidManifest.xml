@@ -1,51 +1,64 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.saverfavor.app">
 
-
-    <!-- Allow the app to access the internet -->
+    <!-- ───── Required Permissions ───── -->
+    <!-- Internet access for WebView -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!-- Allow the app to check network connectivity status -->
+    <!-- Check network state for offline fallback logic -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-
-
     <application
-        android:label="SaverFavor.com"
         android:name="${applicationName}"
+        
+        <!-- App label shown under the icon and in Play Store -->
+        android:label="@string/app_name"
+        
+        <!-- Launcher icon -->
         android:icon="@mipmap/ic_launcher"
-        android:hardwareAccelerated="true">
+        
+        <!-- Enable GPU acceleration for smooth WebView rendering -->
+        android:hardwareAccelerated="true"
+        
+        <!-- Allow cleartext HTTP if your site uses non-HTTPS (better to use HTTPS) -->
+        android:usesCleartextTraffic="true"
+        
+        <!-- Optional: point to a custom network-security-config -->
+        android:networkSecurityConfig="@xml/network_security_config">
+
+        <!-- ───── Main (Launcher) Activity ───── -->
         <activity
             android:name=".MainActivity"
+            
+            <!-- Required on Android 12+ for activities with intent-filters -->
             android:exported="true"
+            
             android:launchMode="singleTop"
             android:taskAffinity=""
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
-            <!-- Specifies an Android theme to apply to this Activity as soon as
-                 the Android process has started. This theme is visible to the user
-                 while the Flutter UI initializes. After that, this theme continues
-                 to determine the Window background behind the Flutter UI. -->
+
+            <!-- Flutter’s splash-to-normal theme transition -->
             <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-              />
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"/>
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!-- Don't delete the meta-data below.
-             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+
+        <!-- Flutter embedding v2 marker (do not remove) -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-    </application>
-    <!-- Required to query activities that can process text, see:
-         https://developer.android.com/training/package-visibility and
-         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
 
-         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    </application>
+
+    <!-- ───── Query for text-processing intents (Flutter ProcessTextPlugin) ───── -->
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
